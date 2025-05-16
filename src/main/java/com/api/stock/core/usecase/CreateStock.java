@@ -13,20 +13,18 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CreateStock {
 
-  private final ProductApiGateway productApiGateway;
   private final StockGateway stockGateway;
+  private final ProductApiGateway productApiGateway;
 
   public Stock execute(final StockDto request) {
-    final var productDetails = this.productApiGateway.getProductDetails(request.productSku());
-
-    if (productDetails == null) {
-      throw new ProductNotFoundException(request.productSku());
-    }
-
     final var stock = this.stockGateway.findByProductSku(request.productSku());
-
     if (stock.isPresent()) {
       throw new StockAlreadyExistsException(request.productSku());
+    }
+
+    final var productDetails = this.productApiGateway.getProductDetails(request.productSku());
+    if (productDetails == null) {
+      throw new ProductNotFoundException(request.productSku());
     }
 
     final var buildDomain = Stock.createStock(request.productSku(), request.quantity());
