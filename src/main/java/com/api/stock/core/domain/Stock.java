@@ -72,7 +72,7 @@ public class Stock {
         List.of(
             new ValidationDomain<>(
                 productSku,
-                format(BLANK_MESSAGE_ERROR, "name"),
+                format(BLANK_MESSAGE_ERROR, "product_sku"),
                 List.of(Objects::isNull, String::isBlank)),
             new ValidationDomain<>(
                 availableQuantity,

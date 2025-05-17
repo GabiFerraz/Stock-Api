@@ -13,7 +13,7 @@ public class StockService {
   private final StockGateway stockGateway;
   private final EventPublisher eventPublisher;
 
-  public boolean reserveStock(String sku, int quantity, int orderId) {
+  public boolean reserveStock(String sku, int quantity, String orderId) {
     final var stock = stockGateway.findByProductSku(sku);
 
     if (stock.isEmpty()) {
