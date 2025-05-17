@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/stock")
+@RequestMapping("/api/stocks")
 public class StockController {
 
   private static final String STOCK_NOT_FOUND_MESSAGE = "Stock not found for product sku=[%s].";

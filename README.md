@@ -78,7 +78,7 @@ Os endpoints estão documentados via **Swagger**:
 ### Possibilidades de Chamadas da API
 1. **Criar Stock:**
 ```json
-curl --location 'localhost:8081/api/stock' \
+curl --location 'localhost:8081/api/stocks' \
 --header 'Content-Type: application/json' \
 --data '{
 "productSku": "BOLA-123-ABC",
@@ -88,17 +88,17 @@ curl --location 'localhost:8081/api/stock' \
 
 2. **Buscar Stock:**
 ```json
-curl --location 'localhost:8081/api/stock/BOLA-123-ABC'
+curl --location 'localhost:8081/api/stocks/BOLA-123-ABC'
 ```
 
 3. **Atualizar Stock:**
 ```json
-curl --location --request PUT 'localhost:8081/api/stock/BOLA-123-ABC?quantity=5'
+curl --location --request PUT 'localhost:8081/api/stocks/BOLA-123-ABC?quantity=5'
 ```
 
 4. **Deletar Stock:**
 ```json
-curl --location --request DELETE 'localhost:8081/api/stock/BOLA-123-ABC'
+curl --location --request DELETE 'localhost:8081/api/stocks/BOLA-123-ABC'
 ```
 
 
