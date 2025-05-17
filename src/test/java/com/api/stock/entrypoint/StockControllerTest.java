@@ -59,7 +59,7 @@ class StockControllerTest {
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.id").value(response.getId()))
         .andExpect(jsonPath("$.productSku").value(response.getProductSku()))
-        .andExpect(jsonPath("$.quantity").value(response.getQuantity()));
+        .andExpect(jsonPath("$.quantity").value(response.getAvailableQuantity()));
 
     final ArgumentCaptor<StockDto> stockCaptor = ArgumentCaptor.forClass(StockDto.class);
     verify(this.createStock).execute(stockCaptor.capture());
@@ -79,7 +79,7 @@ class StockControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(response.getId()))
         .andExpect(jsonPath("$.productSku").value(response.getProductSku()))
-        .andExpect(jsonPath("$.quantity").value(response.getQuantity()));
+        .andExpect(jsonPath("$.quantity").value(response.getAvailableQuantity()));
 
     verify(this.searchStock).execute(productSku);
   }
@@ -113,7 +113,7 @@ class StockControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(response.getId()))
         .andExpect(jsonPath("$.productSku").value(response.getProductSku()))
-        .andExpect(jsonPath("$.quantity").value(response.getQuantity()));
+        .andExpect(jsonPath("$.quantity").value(response.getAvailableQuantity()));
 
     verify(this.updateStock).execute(productSku, quantity);
   }

@@ -15,7 +15,7 @@ class StockTest {
     final var stock = Stock.createStock("BOLA-123-ABC", 10);
 
     assert stock.getProductSku().equals("BOLA-123-ABC");
-    assert stock.getQuantity().equals(10);
+    assert stock.getAvailableQuantity().equals(10);
   }
 
   @ParameterizedTest

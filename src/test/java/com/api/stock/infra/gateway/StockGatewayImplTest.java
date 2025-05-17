@@ -31,7 +31,7 @@ class StockGatewayImplTest {
 
     assertThat(response.getId()).isEqualTo(entityResponse.getId());
     assertThat(response.getProductSku()).isEqualTo(entityResponse.getProductSku());
-    assertThat(response.getQuantity()).isEqualTo(entityResponse.getQuantity());
+    assertThat(response.getAvailableQuantity()).isEqualTo(entityResponse.getQuantity());
 
     final var entityCaptured = entityCaptor.getValue();
     verify(this.stockRepository).save(entityCaptured);
@@ -112,7 +112,7 @@ class StockGatewayImplTest {
 
     assertThat(response.getId()).isEqualTo(entityUpdated.getId());
     assertThat(response.getProductSku()).isEqualTo(entityUpdated.getProductSku());
-    assertThat(response.getQuantity()).isEqualTo(entityUpdated.getQuantity());
+    assertThat(response.getAvailableQuantity()).isEqualTo(entityUpdated.getQuantity());
 
     final var entityCaptured = entityCaptor.getValue();
     verify(this.stockRepository).save(entityCaptured);

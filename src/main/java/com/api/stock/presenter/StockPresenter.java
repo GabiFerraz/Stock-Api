@@ -11,7 +11,7 @@ public class StockPresenter {
     return StockPresenterResponse.builder()
         .id(stock.getId())
         .productSku(stock.getProductSku())
-        .quantity(stock.getQuantity())
+        .quantity(stock.getAvailableQuantity())
         .build();
   }
 }

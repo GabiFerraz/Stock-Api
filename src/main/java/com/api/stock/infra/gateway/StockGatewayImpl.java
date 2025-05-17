@@ -28,7 +28,7 @@ public class StockGatewayImpl implements StockGateway {
       final var entity =
           StockEntity.builder()
               .productSku(stock.getProductSku())
-              .quantity(stock.getQuantity())
+              .availableQuantity(stock.getAvailableQuantity())
               .build();
 
       final var saved = this.stockRepository.save(entity);
@@ -59,7 +59,7 @@ public class StockGatewayImpl implements StockGateway {
               .orElseThrow(
                   () -> new GatewayException(format(FIND_ERROR_MESSAGE, stock.getProductSku())));
 
-      entity.setQuantity(stock.getQuantity());
+      entity.setAvailableQuantity(stock.getAvailableQuantity());
 
       final var saved = this.stockRepository.save(entity);
 
@@ -79,6 +79,6 @@ public class StockGatewayImpl implements StockGateway {
   }
 
   private Stock toResponse(final StockEntity entity) {
-    return new Stock(entity.getId(), entity.getProductSku(), entity.getQuantity());
+    return new Stock(entity.getId(), entity.getProductSku(), entity.getAvailableQuantity());
   }
 }

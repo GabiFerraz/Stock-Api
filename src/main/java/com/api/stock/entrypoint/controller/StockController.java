@@ -73,6 +73,6 @@ public class StockController {
   }
 
   private StockDto toStockDto(final Stock stock) {
-    return new StockDto(stock.getProductSku(), stock.getQuantity());
+    return new StockDto(stock.getProductSku(), stock.getAvailableQuantity());
   }
 }

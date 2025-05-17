@@ -17,23 +17,23 @@ public class Stock {
 
   private Integer id;
   private String productSku;
-  private Integer quantity;
+  private Integer availableQuantity;
 
   public Stock() {}
 
-  public Stock(final Integer id, final String productSku, final Integer quantity) {
+  public Stock(final Integer id, final String productSku, final Integer availableQuantity) {
 
-    validateDomain(productSku, quantity);
+    validateDomain(productSku, availableQuantity);
 
     this.id = id;
     this.productSku = productSku;
-    this.quantity = quantity;
+    this.availableQuantity = availableQuantity;
   }
 
-  public static Stock createStock(final String productSku, final Integer quantity) {
-    validateDomain(productSku, quantity);
+  public static Stock createStock(final String productSku, final Integer availableQuantity) {
+    validateDomain(productSku, availableQuantity);
 
-    return new Stock(null, productSku, quantity);
+    return new Stock(null, productSku, availableQuantity);
   }
 
   public Integer getId() {
@@ -44,15 +44,30 @@ public class Stock {
     return productSku;
   }
 
-  public Integer getQuantity() {
-    return quantity;
+  public Integer getAvailableQuantity() {
+    return availableQuantity;
   }
 
-  public void setQuantity(final Integer quantity) {
-    this.quantity = quantity;
+  public void setAvailableQuantity(final Integer availableQuantity) {
+    this.availableQuantity = availableQuantity;
   }
 
-  private static void validateDomain(final String productSku, final Integer quantity) {
+  public boolean reserve(int quantity) {
+    if (quantity <= 0 || quantity > availableQuantity) {
+      return false;
+    }
+
+    availableQuantity -= quantity;
+    return true;
+  }
+
+  public void release(int quantity) {
+    if (quantity > 0) {
+      availableQuantity += quantity;
+    }
+  }
+
+  private static void validateDomain(final String productSku, final Integer availableQuantity) {
     final List<ValidationDomain<?>> rules =
         List.of(
             new ValidationDomain<>(
@@ -60,10 +75,12 @@ public class Stock {
                 format(BLANK_MESSAGE_ERROR, "name"),
                 List.of(Objects::isNull, String::isBlank)),
             new ValidationDomain<>(
-                quantity, String.format(BLANK_MESSAGE_ERROR, "quantity"), List.of(Objects::isNull)),
+                availableQuantity,
+                String.format(BLANK_MESSAGE_ERROR, "available_quantity"),
+                List.of(Objects::isNull)),
             new ValidationDomain<>(
-                quantity,
-                String.format(NEGATIVE_MESSAGE_ERROR, "quantity"),
+                availableQuantity,
+                String.format(NEGATIVE_MESSAGE_ERROR, "available_quantity"),
                 List.of(q -> q != null && q <= 0)));
 
     final var errors = validate(rules);

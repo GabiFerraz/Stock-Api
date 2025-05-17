@@ -18,7 +18,7 @@ public class UpdateStock {
             .findByProductSku(productSku)
             .orElseThrow(() -> new StockNotFoundException(productSku));
 
-    existingStock.setQuantity(quantity);
+    existingStock.setAvailableQuantity(quantity);
 
     return this.stockGateway.update(existingStock);
   }

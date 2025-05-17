@@ -19,6 +19,6 @@ public class StockEntity {
   @Column(name = "product_sku", nullable = false, unique = true)
   private String productSku;
 
-  @Column(name = "quantity", nullable = false)
-  private Integer quantity;
+  @Column(name = "available_quantity", nullable = false)
+  private Integer availableQuantity;
 }
