@@ -19,9 +19,10 @@ class StockGatewayImplTest {
 
   @Test
   void shouldSaveStockSuccessfully() {
-    final var entity = StockEntity.builder().productSku("BOLA-123-ABC").quantity(10).build();
+    final var entity =
+        StockEntity.builder().productSku("BOLA-123-ABC").availableQuantity(10).build();
     final var entityResponse =
-        StockEntity.builder().id(1).productSku("BOLA-123-ABC").quantity(10).build();
+        StockEntity.builder().id(1).productSku("BOLA-123-ABC").availableQuantity(10).build();
     final var stockDomain = new Stock(1, "BOLA-123-ABC", 10);
     final ArgumentCaptor<StockEntity> entityCaptor = ArgumentCaptor.forClass(StockEntity.class);
 
@@ -31,14 +32,14 @@ class StockGatewayImplTest {
 
     assertThat(response.getId()).isEqualTo(entityResponse.getId());
     assertThat(response.getProductSku()).isEqualTo(entityResponse.getProductSku());
-    assertThat(response.getAvailableQuantity()).isEqualTo(entityResponse.getQuantity());
+    assertThat(response.getAvailableQuantity()).isEqualTo(entityResponse.getAvailableQuantity());
 
     final var entityCaptured = entityCaptor.getValue();
     verify(this.stockRepository).save(entityCaptured);
 
     assertThat(entityCaptured.getId()).isNull();
     assertThat(entityCaptured.getProductSku()).isEqualTo(entity.getProductSku());
-    assertThat(entityCaptured.getQuantity()).isEqualTo(entity.getQuantity());
+    assertThat(entityCaptured.getAvailableQuantity()).isEqualTo(entity.getAvailableQuantity());
   }
 
   @Test
@@ -57,7 +58,8 @@ class StockGatewayImplTest {
   @Test
   void shouldFindStockSuccessfully() {
     final var productSku = "BOLA-123-ABC";
-    final var entity = StockEntity.builder().id(1).productSku(productSku).quantity(10).build();
+    final var entity =
+        StockEntity.builder().id(1).productSku(productSku).availableQuantity(10).build();
 
     when(this.stockRepository.findByProductSku(productSku)).thenReturn(Optional.of(entity));
 
@@ -99,9 +101,9 @@ class StockGatewayImplTest {
   @Test
   void shouldUpdateStockSuccessfully() {
     final var entityFound =
-        StockEntity.builder().id(1).productSku("BOLA-123-ABC").quantity(10).build();
+        StockEntity.builder().id(1).productSku("BOLA-123-ABC").availableQuantity(10).build();
     final var entityUpdated =
-        StockEntity.builder().id(1).productSku("BOLA-123-ABC").quantity(20).build();
+        StockEntity.builder().id(1).productSku("BOLA-123-ABC").availableQuantity(20).build();
     final var stockUpdated = new Stock(1, "BOLA-123-ABC", 20);
     final ArgumentCaptor<StockEntity> entityCaptor = ArgumentCaptor.forClass(StockEntity.class);
 
@@ -112,14 +114,15 @@ class StockGatewayImplTest {
 
     assertThat(response.getId()).isEqualTo(entityUpdated.getId());
     assertThat(response.getProductSku()).isEqualTo(entityUpdated.getProductSku());
-    assertThat(response.getAvailableQuantity()).isEqualTo(entityUpdated.getQuantity());
+    assertThat(response.getAvailableQuantity()).isEqualTo(entityUpdated.getAvailableQuantity());
 
     final var entityCaptured = entityCaptor.getValue();
     verify(this.stockRepository).save(entityCaptured);
 
     assertThat(entityCaptured.getId()).isEqualTo(entityFound.getId());
     assertThat(entityCaptured.getProductSku()).isEqualTo(entityFound.getProductSku());
-    assertThat(entityCaptured.getQuantity()).isEqualTo(entityUpdated.getQuantity());
+    assertThat(entityCaptured.getAvailableQuantity())
+        .isEqualTo(entityUpdated.getAvailableQuantity());
   }
 
   @Test
@@ -138,7 +141,7 @@ class StockGatewayImplTest {
   @Test
   void shouldThrowExceptionWhenOccursErrorUpdatingStock() {
     final var entityFound =
-        StockEntity.builder().id(1).productSku("BOLA-123-ABC").quantity(10).build();
+        StockEntity.builder().id(1).productSku("BOLA-123-ABC").availableQuantity(10).build();
     final var stockUpdated = new Stock(1, "BOLA-123-ABC", 20);
 
     doReturn(Optional.of(entityFound)).when(this.stockRepository).findByProductSku(any());

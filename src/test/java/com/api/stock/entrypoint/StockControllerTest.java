@@ -33,7 +33,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @ActiveProfiles("test")
 class StockControllerTest {
 
-  private static final String BASE_URL = "/api/stock";
+  private static final String BASE_URL = "/api/stocks";
   private static final String BASE_URL_WITH_PRODUCT_SKU = BASE_URL + "/%s";
 
   @Autowired private MockMvc mockMvc;

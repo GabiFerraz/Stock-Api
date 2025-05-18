@@ -27,7 +27,7 @@ public class CreateStock {
       throw new ProductNotFoundException(request.productSku());
     }
 
-    final var buildDomain = Stock.createStock(request.productSku(), request.quantity());
+    final var buildDomain = Stock.createStock(request.productSku(), request.availableQuantity());
 
     return this.stockGateway.save(buildDomain);
   }

@@ -46,7 +46,7 @@ class CreateStockTest {
     verify(this.stockGateway).save(stockCaptured);
 
     assertThat(stockCaptured.getProductSku()).isEqualTo(request.productSku());
-    assertThat(stockCaptured.getAvailableQuantity()).isEqualTo(request.quantity());
+    assertThat(stockCaptured.getAvailableQuantity()).isEqualTo(request.availableQuantity());
   }
 
   @Test

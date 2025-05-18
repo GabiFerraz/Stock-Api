@@ -24,7 +24,7 @@ class StockTest {
   void shouldNotCreateStockWithInvalidProductSku(final String productSku) {
     assertThatThrownBy(() -> Stock.createStock(productSku, 10))
         .isInstanceOf(DomainException.class)
-        .hasMessage("Field=[name] should not be empty or null by domain stock");
+        .hasMessage("Field=[product_sku] should not be empty or null by domain stock");
   }
 
   @ParameterizedTest
@@ -32,6 +32,6 @@ class StockTest {
   void shouldNotCreateStockWithInvalidQuantity(final int quantity) {
     assertThatThrownBy(() -> Stock.createStock("BOLA-123-ABC", quantity))
         .isInstanceOf(DomainException.class)
-        .hasMessage("Field=[quantity] should be greater than zero by domain stock");
+        .hasMessage("Field=[available_quantity] should be greater than zero by domain stock");
   }
 }
