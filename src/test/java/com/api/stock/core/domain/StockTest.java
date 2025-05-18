@@ -28,10 +28,10 @@ class StockTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {0, -1})
+  @ValueSource(ints = {-1})
   void shouldNotCreateStockWithInvalidQuantity(final int quantity) {
     assertThatThrownBy(() -> Stock.createStock("BOLA-123-ABC", quantity))
         .isInstanceOf(DomainException.class)
-        .hasMessage("Field=[available_quantity] should be greater than zero by domain stock");
+        .hasMessage("Field=[available_quantity] should not be negative by domain stock");
   }
 }

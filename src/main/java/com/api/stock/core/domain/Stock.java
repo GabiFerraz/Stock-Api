@@ -13,7 +13,7 @@ public class Stock {
 
   private static final String DOMAIN_MESSAGE_ERROR = "by domain stock";
   private static final String BLANK_MESSAGE_ERROR = "Field=[%s] should not be empty or null";
-  private static final String NEGATIVE_MESSAGE_ERROR = "Field=[%s] should be greater than zero";
+  private static final String NEGATIVE_MESSAGE_ERROR = "Field=[%s] should not be negative";
 
   private Integer id;
   private String productSku;
@@ -81,7 +81,7 @@ public class Stock {
             new ValidationDomain<>(
                 availableQuantity,
                 String.format(NEGATIVE_MESSAGE_ERROR, "available_quantity"),
-                List.of(q -> q != null && q <= 0)));
+                List.of(q -> q != null && q < 0)));
 
     final var errors = validate(rules);
 

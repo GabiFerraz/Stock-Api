@@ -19,10 +19,10 @@ class UpdateStockTest {
   @Test
   void shouldUpdateStockSuccessfully() {
     final var productSku = "BOLA-123-ABC";
-    final var quantity = 10;
+    final var quantity = 0;
     final var stock = new Stock(1, "BOLA-123-ABC", 10);
     final ArgumentCaptor<Stock> stockCaptor = ArgumentCaptor.forClass(Stock.class);
-    final var stockUpdated = new Stock(1, "BOLA-123-ABC", 20);
+    final var stockUpdated = new Stock(1, "BOLA-123-ABC", 0);
 
     when(this.stockGateway.findByProductSku(productSku)).thenReturn(Optional.of(stock));
     when(this.stockGateway.update(stockCaptor.capture())).thenReturn(stockUpdated);
