@@ -18,15 +18,15 @@ public class RabbitMQEventConsumer {
   private final EventPublisher eventPublisher;
 
   @RabbitListener(queues = RabbitMQConfig.RESERVE_STOCK_QUEUE)
-  public void consumeReserveStockEvent(ReserveStockEvent event) {
+  public void consumeReserveStockEvent(final ReserveStockEvent event) {
     boolean success =
-        stockService.reserveStock(event.productSku(), event.quantity(), event.orderId());
+        this.stockService.reserveStock(event.productSku(), event.quantity(), event.orderId());
 
-    eventPublisher.publish(new StockReservedEvent(event.orderId(), success));
+    this.eventPublisher.publish(new StockReservedEvent(event.orderId(), success));
   }
 
   @RabbitListener(queues = RabbitMQConfig.RELEASE_STOCK_QUEUE)
-  public void consumeReleaseStockEvent(ReleaseStockEvent event) {
-    stockService.releaseStock(event.productSku(), event.quantity());
+  public void consumeReleaseStockEvent(final ReleaseStockEvent event) {
+    this.stockService.releaseStock(event.productSku(), event.quantity());
   }
 }
