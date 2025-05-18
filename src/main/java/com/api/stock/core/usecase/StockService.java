@@ -24,7 +24,7 @@ public class StockService {
     boolean reserved = stockFound.reserve(quantity);
 
     if (reserved) {
-      this.stockGateway.save(stockFound);
+      this.stockGateway.update(stockFound);
     }
 
     eventPublisher.publish(new StockReservedEvent(orderId, reserved));
@@ -39,7 +39,7 @@ public class StockService {
       final var stockFound = stock.get();
       stockFound.release(quantity);
 
-      this.stockGateway.save(stockFound);
+      this.stockGateway.update(stockFound);
     }
   }
 }
