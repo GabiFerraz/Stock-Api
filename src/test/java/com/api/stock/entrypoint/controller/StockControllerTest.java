@@ -1,4 +1,4 @@
-package com.api.stock.entrypoint;
+package com.api.stock.entrypoint.controller;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
