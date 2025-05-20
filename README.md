@@ -26,6 +26,8 @@ A API permite:
 - **Docker Compose**
 - **Spotless**
 - **Jacoco**
+- **Docker**
+- **RabbitMQ**
 
 ## Estrutura do Projeto
 O projeto segue uma arquitetura modularizada, organizada nas seguintes camadas:
